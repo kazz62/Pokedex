@@ -12,9 +12,13 @@ L'ensemble des fonctionnalitées voulues à la base ont été ajoutées. Cependa
 ### Affichage de la liste
 N'ayant pas réussi à afficher la listview comme je le souhaitais, celle-ci est simplément une chaîne de caractères assez peu révélante sur le pokémon à cause des noms en anglais.
 
+## Les plus du projet
 
-## Temps
+### Temps
 Le projet à été réalisé sur une journée de temps. L'ensemble des fonctionnalités sont présentes et fonctionnelles.
+
+### SplashScreen
+Un splash screen affichant une pokéball a été ajouté à l'ouverture de l'application.
 
 ## Améliorations possibles
 * Modifier la taille de l'image du pokémon ainsi que les tailles des polices d'écritures
