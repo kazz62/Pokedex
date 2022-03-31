@@ -11,7 +11,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,12 +32,14 @@ class MainActivity : AppCompatActivity() {
                 var postlist : List<Pokemon>? = response.body() as List<Pokemon>? //liste qui stock le retour du Call
                 var post = arrayOfNulls<String>(postlist!!.size)
 
-                for(i in postlist!!.indices) // ajout des datas choisies dans l'adapter
-                    post[i] = postlist!![i]!!.forme + " #" + postlist!![i]!!.ndex
+                for(i in postlist.indices) // ajout des datas choisies dans l'adapter
+                    post[i] = postlist[i].forme + " #" + postlist[i].ndex
+
+                "${postlist.first().forme} "
 
                 var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
                 val listview = findViewById<ListView>(R.id.listview)
-                listview.adapter = adapter
+                listview.adapter = adapter //recyclerView
 
                 /**
                  * Au click sur un élément de la liste,

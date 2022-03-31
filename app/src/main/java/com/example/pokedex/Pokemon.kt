@@ -3,6 +3,7 @@ package com.example.pokedex
 /**
  *  Cette classe regroupe les données que l'on récupère depuis l'API
  */
+
 class Pokemon {
     var id:String? = ""
     var ndex:String? = ""

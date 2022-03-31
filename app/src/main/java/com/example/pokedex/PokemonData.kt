@@ -3,6 +3,7 @@ package com.example.pokedex
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +13,6 @@ class PokemonData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokemon_data)
-
         // Récupération des données transmises de l'autre activité
         val extras = intent.extras
         var index = ""
