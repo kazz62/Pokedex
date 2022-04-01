@@ -16,28 +16,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // variable utilisant retrofit pour récupérer les données de l'API et les convertir en données JSON
-        var rf = Retrofit.Builder()
+        // variable utilisant retrofit pour récupérer les données de l'api et les convertir en données JSON
+        val rf = Retrofit.Builder()
             .baseUrl(PokedexInterface.URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
 
-        var API = rf.create(PokedexInterface::class.java)
-        var call = API.posts //Récupération de la liste de données
+        val api = rf.create(PokedexInterface::class.java)
+        val call = api.posts //Récupération de la liste de données
 
         call?.enqueue(object:Callback<List<Pokemon?>?>{
             override fun onResponse(
                 call: Call<List<Pokemon?>?>,
                 response: Response<List<Pokemon?>?>
             ) {
-                var postlist : List<Pokemon>? = response.body() as List<Pokemon>? //liste qui stock le retour du Call
-                var post = arrayOfNulls<String>(postlist!!.size)
+                val postlist : List<Pokemon>? = response.body() as List<Pokemon>? //liste qui stock le retour du Call
+                val post = arrayOfNulls<String>(postlist!!.size)
 
                 for(i in postlist.indices) // ajout des datas choisies dans l'adapter
-                    post[i] = postlist[i].forme + " #" + postlist[i].ndex
+                    //post[i] = postlist[i].forme + " #" + postlist[i].ndex
+                    post[i] = "${postlist[i].forme} #${postlist[i].ndex}"
 
-                "${postlist.first().forme} "
-
-                var adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
+                val adapter = ArrayAdapter<String>(applicationContext, android.R.layout.simple_dropdown_item_1line, post)
                 val listview = findViewById<ListView>(R.id.listview)
                 listview.adapter = adapter //recyclerView
 
@@ -46,34 +45,16 @@ class MainActivity : AppCompatActivity() {
                  * on envoie les données de la case choisie
                  * à la prochain activité
                  */
-                listview.setOnItemClickListener { parent, view, position, id ->
+                listview.setOnItemClickListener { _, _, position, _ ->
                     //val listItem: Any = listview.getItemAtPosition(position)
                     val intent = Intent(applicationContext, PokemonData::class.java)
-
-                    // Ajout des informations sur le pokémon
-                    intent.putExtra("name",postlist[position].forme)
-                    intent.putExtra("index",postlist[position].ndex)
-                    intent.putExtra("type1",postlist[position].type1)
-                    intent.putExtra("type2",postlist[position].type2)
-                    intent.putExtra("ability1",postlist[position].ability1)
-                    intent.putExtra("ability2",postlist[position].ability2)
-
-                    intent.putExtra("hp",postlist[position].hp)
-                    intent.putExtra("atck",postlist[position].attack)
-                    intent.putExtra("def",postlist[position].defense)
-                    intent.putExtra("speatck",postlist[position].spattack)
-                    intent.putExtra("spedefense",postlist[position].spdefense)
-                    intent.putExtra("speed",postlist[position].speed)
-
-                    intent.putExtra("weight",postlist[position].weight)
-                    intent.putExtra("height",postlist[position].height)
-                    intent.putExtra("preevolution",postlist[position].preevolution)
+                    intent.putExtra("pokemon",postlist[position])
                     startActivity(intent)
                 }
             }
 
             override fun onFailure(call: Call<List<Pokemon?>?>, t: Throwable) {
             }
-        });
+        })
     }
 }
