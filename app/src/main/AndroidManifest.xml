@@ -14,13 +14,15 @@
             android:name=".PokemonData"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false"/>
+
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true" >
+            android:theme="@style/SplashActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
